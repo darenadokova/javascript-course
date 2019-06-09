@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Task 2</title>
+    <script type="text/javascript">
+    var country = '';
+
+    var message = 'Въведете кода на държавата:';
+    var outputMessage = '<em>Здравей, Здравствуйте, Hello, Hallo, Hola ...</em>';
+
+    country = window.prompt(message);
+
+    if (country == "BG"){
+        outputMessage = '<h1>Здравей! (' + country + ')<h1>';
+       
+    } else if (country == "UK"){
+        outputMessage = '<h1>Welcome in ' + country + '!<h1>';
+    }
+    
+    document.write(outputMessage);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
