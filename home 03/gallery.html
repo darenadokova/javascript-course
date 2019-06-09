@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gallery Home 03</title>
+    <style>
+        ul#gallery {
+            list-style: none;
+        }
+    
+        ul#gallery li+li { /* Непосредствено следващият li след него */
+            display: none;
+        }
+        
+        .buttons {
+            margin-left: 130px;
+        }
+        </style>
+    </head>
+    <ul id="gallery">
+        <li><img src="pics-large/pic1-320x240.jpg"></li>
+        <li><img src="pics-large/pic2-320x240.jpg"></li>
+        <li><img src="pics-large/pic3-320x240.jpg"></li>
+        <li><img src="pics-large/pic4-320x240.jpg"></li>
+        <li><img src="pics-large/pic5-320x240.jpg"></li>
+    </ul>
+
+    <div class="buttons">
+        <input type="button" id="prv" value="<<">
+        <button id="slide">Auto</button>
+        <input type="button" id="nxt" value=">>">
+    </div>
+<!-- Неблокирещо включване -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script> 
+// Локален JS
+  $(document).ready(function(){
+    var intervalId = 0,
+        next = 1,
+        buttonLabel = 'Stop';
+
+    $('#nxt').click(function (){
+        next++;
+        showNextImage();
+        
+        if (next == $('#gallery li').length) {
+            $('#nxt').css('visibility', 'hidden');
+        } else {
+            $('#prv').css('visibility', 'visible');
+        }
+    }); //on click button next 
+
+    $('#slide').click(function (){
+        if (intervalId > 0){
+            clearInterval(intervalId);
+            intervalId = 0; // зачистваме стойносста
+            buttonLabel = 'Auto';
+        } else {
+            intervalId = setInterval(showNextImage, 2000);
+            buttonLabel = 'Stop';
+        }
+        $(this).html(buttonLabel); //когато използваме button
+        //console.log('interval id:', intervalId);
+    }); //on click button auto
+
+
+    $('#prv').click(function (){
+        next--;
+        $('#gallery li:last-child').prependTo($('#gallery'));
+
+        if (next == 1) {
+            $('#prv').css('visibility', 'hidden');
+        } else {
+            $('#nxt').css('visibility', 'visible');
+        }
+    }); //on click button previous 
+
+});
+// Коментар document ready
+
+function showNextImage(){
+    $('#gallery li:first-child').appendTo($('#gallery'));
+}
+        </script> 
+</body>
+</html>
