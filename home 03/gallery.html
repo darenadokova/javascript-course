@@ -38,18 +38,17 @@
 // Локален JS
   $(document).ready(function(){
     var intervalId = 0,
-        size = $('#gallery li').length;
         next = 1,
         buttonLabel = 'Stop';
 
     $('#nxt').click(function (){
         next++;
-        showNextImage('after');
+        showNextImage();
         
-        if (next >= size) {
-            hideNext();
+        if (next == $('#gallery li').length) {
+            $('#nxt').css('visibility', 'hidden');
         } else {
-            showPrev();
+            $('#prv').css('visibility', 'visible');
         }
     }); //on click button next 
 
@@ -69,41 +68,20 @@
 
     $('#prv').click(function (){
         next--;
-        showNextImage('before');
+        $('#gallery li:last-child').prependTo($('#gallery'));
 
-        if (next <= 1) {
-           hidePrev();
+        if (next == 1) {
+            $('#prv').css('visibility', 'hidden');
         } else {
-            showNext();
+            $('#nxt').css('visibility', 'visible');
         }
     }); //on click button previous 
 
 });
 // Коментар document ready
 
-function showNextImage(where){
-
-if (where === 'after') {
+function showNextImage(){
     $('#gallery li:first-child').appendTo($('#gallery'));
-} else if (where === 'before') {
-    $('#gallery li:last-child').prependTo($('#gallery'));
-}
-}
-
-function hideNext(){
-    $('#nxt').css('visibility', 'hidden');
-}
-
-function hidePrev(){
-    $('#prv').css('visibility', 'hidden');
-}
-
-function showNext(){
-    $('#nxt').css('visibility', 'visible');
-}
-
-function showPrev(){
-    $('#prv').css('visibility', 'visible');
 }
         </script> 
 </body>
